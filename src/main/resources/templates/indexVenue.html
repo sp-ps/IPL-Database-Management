@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Venues</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<div class="container" th:insert="fragments/header"></div>
+<div class="container">
+
+  <div class="card">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Register Venue</h5>
+      <p class="card-text">As the new season is approaching, register the venue to be part of exciting journey.</p>
+      <a href="/venue/add" class="btn btn-primary">Register</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">De-Register Venue</h5>
+      <p class="card-text">Not able to make this season, de-register the venue for avoiding troubles.</p>
+      <a href="/venue/delete" class="btn btn-primary">De-Register</a>
+    </div>
+  </div>
+
+  <!--    <button><a href="/team/add">Register a Team</a> </button>-->
+  <!--    <button><a href="/team/delete">Delete a Team</a> </button>-->
+
+</div>
+
+</body>
+</html>

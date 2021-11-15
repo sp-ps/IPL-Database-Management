@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details of A Team</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container" th:insert="fragments/header"></div>
+
+<div class="container">
+    <div th:if="${userMessage}" th:utext="${userMessage}" class="alert alert-success text-center"></div>
+    <div th:if="${dangerMessage}" th:utext="${dangerMessage}" class="alert alert-danger text-center"></div>
+    <h1></span> <span th:text="${seasonInfo.team.teamName}"></span> <span th:text="${seasonInfo.season}"></h1>
+
+    <table class="table align-middle">
+        <thead>
+        <tr>
+            <th class="col">Players</th>
+            <th class="col">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p: ${seasonInfo.players}" >
+            <td th:text="${p.playerName}"></td>
+            <td>
+                <form action="/season/removePlayer" method="post">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}"/>
+                    <input type="hidden" name="seasonId" th:value="${seasonInfo.season}">
+                    <input type="hidden" name="teamId" th:value="${seasonInfo.team.teamId}">
+                    <input type="hidden" name="playerId" th:value="${p.playerId}">
+                    <button type="submit" class="btn btn-danger btn-sm px-3"><i class="fas fa-times"></i></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <form action="/season/addPlayer" method="post">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+            <input type="hidden" name="season" th:value="${seasonInfo.season}">
+            <input type="hidden" name="team" th:value="${seasonInfo.team.teamId}">
+            <h2>Add a Player</h2>
+            <select class="form-control" name="playerId" id="playerId">
+
+                <option th:each="p : ${players}"
+                        th:value="${p.playerId}"
+                        th:text="${p.playerName}">
+                </option>
+            </select>
+            <button class="btn btn-primary btn-lg" type="submit">Add Player</button>
+        </form>
+    </div>
+
+    <table class="table align-middle">
+        <thead>
+        <tr>
+            <th class="col">Coaches</th>
+            <th class="col">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p: ${seasonInfo.coaches}" >
+            <td th:text="${p}"></td>
+            <td>
+                <form action="/season/removeCoach" method="post">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}"/>
+                    <input type="hidden" name="seasonId" th:value="${seasonInfo.season}">
+                    <input type="hidden" name="teamId" th:value="${seasonInfo.team.teamId}">
+                    <input type="hidden" name="coach" th:value="${p}">
+                    <button type="submit" class="btn btn-danger btn-sm px-3"><i class="fas fa-times"></i></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <form action="/season/addCoach" method="post">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+            <input type="hidden" name="season" th:value="${seasonInfo.season}">
+            <input type="hidden" name="team" th:value="${seasonInfo.team.teamId}">
+            <h2>Add a Coach</h2>
+            <input class="form-control" type="text" name="coach">
+            <button class="btn btn-primary btn-lg" type="submit"> Add Coach</button>
+        </form>
+    </div>
+
+    <table class="table align-middle">
+        <thead>
+        <tr>
+            <th class="col">Owners</th>
+            <th class="col">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p: ${seasonInfo.owners}" >
+            <td th:text="${p}"></td>
+            <td>
+                <form action="/season/removeOwner" method="post">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}"/>
+                    <input type="hidden" name="seasonId" th:value="${seasonInfo.season}">
+                    <input type="hidden" name="teamId" th:value="${seasonInfo.team.teamId}">
+                    <input type="hidden" name="owner" th:value="${p}">
+                    <button type="submit" class="btn btn-danger btn-sm px-3"><i class="fas fa-times"></i></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <form action="/season/addOwner" method="post">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+            <input type="hidden" name="season" th:value="${seasonInfo.season}">
+            <input type="hidden" name="team" th:value="${seasonInfo.team.teamId}">
+            <h2>Add an Owner</h2>
+            <input class="form-control" type="text" name="owner">
+            <button class="btn btn-primary btn-lg" type="submit"> Add Owner</button>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+<!--<form action="#" th:action="@{/season/addDetails1}" th:object="${seasonInfo}" method="post">-->
+
+<!--    <fieldset>-->
+
+<!--&lt;!&ndash;        <legend th:text="#{seedstarter.data}">Seed Starter Data</legend>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <ul th:if="${#fields.hasErrors('*')}" class="errorlist">&ndash;&gt;-->
+<!--&lt;!&ndash;            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>&ndash;&gt;-->
+<!--&lt;!&ndash;        </ul>&ndash;&gt;-->
+
+<!--        <div>-->
+<!--            <label>Rows</label>-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>Row</th>-->
+<!--                    <th>Variety</th>-->
+<!--                    <th>Seeds per cell</th>-->
+<!--                    <th>-->
+<!--                        <button type="submit" name="addPlayerRow" >Add New Player</button>-->
+<!--                    </th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr th:each="coach,rowStat : *{players}">-->
+<!--                    <td th:text="${rowStat.count}">1</td>-->
+<!--                    <div>-->
+<!--                        <select th:field="*{players}">-->
+<!--                            <option th:each="type : ${allTypes}" th:value="${type}" th:text="#{${'seedstarter.type.' + type}}">Wireframe</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <td>-->
+<!--                        <button type="submit" name="removeCoachRow" th:value="${rowStat.index}">Remove row</button>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+
+<!--        <div class="submit">-->
+<!--            <button type="submit" name="save">Update Details</button>-->
+<!--        </div>-->
+
+<!--    </fieldset>-->
+
+<!--</form>-->
+
+
+</body>
+</html>

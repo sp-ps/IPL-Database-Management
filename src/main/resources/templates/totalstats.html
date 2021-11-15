@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Stats</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/paytm.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+</head>
+<body>
+
+<div class="container" th:insert="fragments/header"></div>
+
+<div class="container">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Seasons
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/stats?season=2019">Action</a>
+            <a class="dropdown-item" href="/stats?season=2018">2018</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
+</div>
+
+
+<!--Whole Container -->
+<div class="rca-container rca-margin">
+    <!-- Points Table for IPL -->
+    <h2 class="rca-stats-title">IPL <span th:text="${season}"></span> -  Points Table</h2>
+    <div class="rca-row">
+        <div class="rca-column-3"></div>
+        <div class="rca-column-6">
+            <!--Points Table-->
+            <div class="rca-mini-widget rca-top-border rca-stats">
+                <div id="tab-41" class="rca-tab-content rca-padding active">
+                    <div class="rca-bowling-score rca-padding rca-no-border">
+                        <div class="rca-row">
+                            <div class="rca-header rca-table">
+                                <div class="rca-col rca-player">
+                                    Team
+                                </div>
+                                <div class="rca-col small">
+                                    M<span class="rca-hide-mobile">atch</span>
+                                </div>
+                                <div class="rca-col small">
+                                    W<span class="rca-hide-mobile">on</span>
+                                </div>
+                                <div class="rca-col small">
+                                    L<span class="rca-hide-mobile">ost</span>
+                                </div>
+                                <div class="rca-col small rca-hide-mobile">
+                                    Tied
+                                </div>
+                                <div class="rca-col small">
+                                    Pts
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rca-row" th:each="s: ${teams}">
+                            <div class="rca-table">
+                                <div class="rca-col rca-player" th:text="${s.team.petName}">
+                                </div>
+                                <div class="rca-col small" th:text="${s.totalMatches}">
+                                </div>
+                                <div class="rca-col small" th:text="${s.totalWins}">
+                                </div>
+                                <div class="rca-col small" th:text="${s.totalLosses}">
+                                </div>
+                                <div class="rca-col small rca-hide-mobile" th:text="${s.totalDraws}">
+                                </div>
+                                <div class="rca-col small" th:text="${s.totalPoints}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rca-column-3"></div>
+        <div class="rca-clear"></div>
+    </div>
+    <!-- Currently not required. -->
+    <!--Widget Outer-->
+    <div class="rca-row">
+        <!--Widget Inner -->
+
+    </div>
+
+
+
+    <!--Stats-->
+    <div class="rca-clear"></div>
+    <h2 class="rca-stats-title">Tournament STATS</h2>
+    <div class="rca-row">
+        <div class="rca-column-4">
+            <div class="rca-micro-widget rca-stats">
+                <div class="rca-match-start">
+                    <h3>Tournament Sixes</h3>
+                    <div class="rca-padding">
+                        <h2 th:text="${tournamentSixes}"></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="rca-micro-widget rca-stats">
+                <div class="rca-match-start">
+                    <h3>Tournament Fours</h3>
+                    <div class="rca-padding">
+                        <h2 th:text="${tournamentFours}"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rca-column-4">
+            <!--Season Stats-->
+            <div class="rca-mini-widget rca-top-border rca-padding rca-stats">
+                <div class="rca-clear"></div>
+                <h2>
+                    Most Runs
+                </h2>
+                <div class="rca-padding">
+
+                    <div class="rca-match-start">
+                        <h3 class=" top-score" th:text="${totalRunsByPlayers[0].player.playerName}"></h3>
+                        <div class="rca-padding">
+                            <h2 th:text="${totalRunsByPlayers[0].stats}"></h2>
+                        </div>
+                    </div>
+                    <div class="rca-row rca-name-tag">
+                        <div class="rca-table" th:each="p,attr : ${totalRunsByPlayers}">
+                            <div th:switch="${attr.index}">
+                                <div th:case="0"></div>
+                                <div th:case="*">
+                                    <div class="rca-col rca-name-info">
+                                        <span class="rca-tag-info" th:text="${attr.count}"></span> <span th:text="${p.player.playerName}"></span>
+                                    </div>
+                                    <div class="rca-col rca-name-score">
+                                        <span th:text="${p.stats}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rca-column-4">
+            <!--Season Stats-->
+            <div class="rca-mini-widget rca-top-border rca-padding rca-stats">
+                <div class="rca-clear"></div>
+                <h2>
+                    Most Wickets
+                </h2>
+                <div class="rca-padding">
+
+                    <div class="rca-match-start">
+                        <h3 class="top-bowl" th:text="${totalWicketsByPlayers[0].player.playerName}"></h3>
+                        <div class="rca-padding">
+                            <h2 th:text="${totalWicketsByPlayers[0].stats}"></h2>
+                        </div>
+
+                    </div>
+                    <div class="rca-row rca-name-tag">
+                        <div class="rca-table" th:each="p, attr : ${totalWicketsByPlayers}">
+                            <div th:switch="${attr.index}">
+                                <div th:case="0"></div>
+                                <div th:case="*">
+                                    <div class="rca-col rca-name-info">
+                                        <span class="rca-tag-info" th:text="${attr.count}"></span> <span th:text="${p.player.playerName}"></span>
+                                    </div>
+                                    <div class="rca-col rca-name-score">
+                                        <span th:text="${p.stats}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="rca-column-4">
+            <!--Season Stats-->
+            <div class="rca-mini-widget rca-top-border rca-padding rca-stats">
+                <div class="rca-clear"></div>
+                <h2>
+                    Most Sixes
+                </h2>
+                <div class="rca-padding">
+
+                    <div class="rca-match-start">
+                        <h3 class=" top-six" th:text="${totalSixesByPlayers[0].player.playerName}"></h3>
+                        <div class="rca-padding">
+                            <h2 th:text="${totalSixesByPlayers[0].stats}"></h2>
+                        </div>
+                    </div>
+                    <div class="rca-row rca-name-tag" th:each="p,attr: ${totalSixesByPlayers}">
+
+                        <div class="rca-table">
+                            <div th:switch="${attr.index}">
+                                <div th:case="0"></div>
+                                <div th:case="*">
+                                    <div class="rca-col rca-name-info">
+                                        <span class="rca-tag-info" th:text="${attr.count}"></span> <span th:text="${p.player.playerName}"></span>
+                                    </div>
+                                    <div class="rca-col rca-name-score">
+                                        <span th:text="${p.stats}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rca-column-4">
+            <!--Season Stats-->
+            <div class="rca-mini-widget rca-top-border rca-padding rca-stats">
+                <div class="rca-clear"></div>
+                <h2>
+                    Most Fours
+                </h2>
+                <div class="rca-padding">
+
+                    <div class="rca-match-start">
+                        <h3 class="top-four" th:text="${totalFoursByPlayers[0].player.playerName}"></h3>
+                        <div class="rca-padding">
+                            <h2 th:text="${totalFoursByPlayers[0].stats}"></h2>
+                        </div>
+<!--                        <h3 class=" top-six">CH Gayle</h3>-->
+<!--                        <div class="rca-padding">-->
+<!--                            <h2>21</h2>-->
+<!--                            <p class="rca-center">-->
+
+<!--                            </p>-->
+<!--                        </div>-->
+                    </div>
+                    <div class="rca-row rca-name-tag">
+                        <div class="rca-table" th:each="p, attr : ${totalFoursByPlayers}">
+                            <div th:switch="${attr.index}">
+                                <div th:case="0"></div>
+                                <div th:case="*">
+                                    <div class="rca-col rca-name-info">
+                                        <span class="rca-tag-info" th:text="${attr.count}"></span> <span th:text="${p.player.playerName}"></span>
+                                    </div>
+                                    <div class="rca-col rca-name-score">
+                                        <span th:text="${p.stats}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rca-column-4">
+            <!--Season Stats-->
+            <div class="rca-mini-widget rca-top-border rca-padding rca-stats">
+                <div class="rca-clear"></div>
+                <h2>
+                    Highest Score
+                </h2>
+                <div class="rca-padding">
+
+                    <div class="rca-match-start">
+                        <h3 class="top-score" th:text="${highestRunsByPlayers[0].player.playerName}"></h3>
+                        <div class="rca-padding">
+                            <h2 th:text="${highestRunsByPlayers[0].stats}"></h2>
+                        </div>
+                    </div>
+
+<!--                    <div class="rca-match-start">-->
+<!--                        <h3 class=" top-six">CH Gayle</h3>-->
+<!--                        <div class="rca-padding">-->
+<!--                            <h2>21</h2>-->
+<!--                            <p class="rca-center">-->
+
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="rca-row rca-name-tag">
+                        <div class="rca-table" th:each="p, attr : ${highestRunsByPlayers}">
+                            <div th:switch="${attr.index}">
+                                <div th:case="0"></div>
+                                <div th:case="*">
+                                    <div class="rca-col rca-name-info">
+                                        <span class="rca-tag-info" th:text="${attr.count}"></span> <span th:text="${p.player.playerName}"></span>
+                                    </div>
+                                    <div class="rca-col rca-name-score">
+                                        <span th:text="${p.stats}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+<script>
+    function showBlock(event) {
+        var sourceParent = event.parentElement.parentElement;
+        var sourceChilds = sourceParent.children;
+        var schild = event.children;
+        var classIndex = event.parentElement.className.indexOf('active');
+        if(classIndex == -1){
+            for (var i=0; i < sourceChilds.length; i++) {
+                sourceChilds.item(i).className = 'rca-inside-tab';
+            }
+            event.parentElement.className = event.parentElement.className + ' active';
+            debugger;
+            schild.className = 'fa fa-angle-up';
+        }
+        else{
+            event.parentElement.className = 'rca-inside-tab';
+            event.children.className = 'fa fa-angle-down';
+        }
+    }
+
+    function showTab(event) {
+        var sourceParent = event.parentElement.parentElement;
+        var sourceChilds = sourceParent.getElementsByClassName("rca-tab-content");
+        var sourceLinkParent = sourceParent.getElementsByClassName("rca-tab-link");
+        for (var i=0; i < sourceChilds.length; i++) {
+            sourceChilds.item(i).classList.remove("active");
+        }
+        for (var i=0; i < sourceLinkParent.length; i++) {
+            sourceLinkParent.item(i).classList.remove("active");
+        }
+        var dataTab= event.getAttribute("data-tab");
+
+        event.classList.add("active");
+        document.getElementById(dataTab).className += ' active';
+    }
+
+
+</script>
+
+</body>
+</html>
